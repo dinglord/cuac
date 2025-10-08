@@ -57,10 +57,14 @@ Go to the repo folder, e.g. `cd ~/containers/guac`
 docker compose up -d
 
 # One-time schema init:
-docker exec guacamole /opt/guacamole/bin/initdb.sh --postgres \
-  | docker exec -i guac-postgres psql \
-      -U "$(cat $PWD/secrets/db_user)" \
-      -d "$(grep POSTGRES_DB $PWD/.env | cut -d= -f2)"
+
+```sh
+DB_USER="$(grep -E '^POSTGRES_USER=' .env | cut -d= -f2)"
+DB_NAME="$(grep -E '^POSTGRES_DB=' .env | cut -d= -f2)"
+
+sudo docker run --platform=linux/amd64 --rm guacamole/guacamole:1.6.0 \
+  /opt/guacamole/bin/initdb.sh --postgresql \
+| sudo docker exec -i guac-postgres psql -U "$DB_USER" -d "$DB_NAME"
 ```
 
 ## Backup script (reads passwords from secrets)
