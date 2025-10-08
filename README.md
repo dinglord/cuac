@@ -45,6 +45,12 @@ docker exec caddy caddy reload --config /etc/caddy/Caddyfile
 
 ## Initialize + start
 
+If on arm (just ones) run this so docker can run amd64 images on arm64 reliably:
+
+```sh
+sudo docker run --privileged --rm tonistiigi/binfmt --install all
+```
+
 Go to the repo folder, e.g. `cd ~/containers/guac`
 
 ```sh
