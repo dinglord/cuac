@@ -13,13 +13,10 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER_FILE: /run/secrets/db_user
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ${DB_DIR}:/var/lib/postgresql/data
-    secrets:
-      - db_user
-      - db_password
     networks:
       - caddy
 
@@ -33,26 +30,13 @@ services:
     environment:
       POSTGRES_HOSTNAME: postgres
       POSTGRES_DATABASE: ${POSTGRES_DB}
-      POSTGRES_USER_FILE: /run/secrets/db_user
-      # Guacamole image doesn’t support POSTGRES_PASSWORD_FILE,
-      # so we inject it via entrypoint wrapper below.
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ${CONFIG_DIR}:/etc/guacamole
       - ${RECORDINGS_DIR}:/var/lib/guacamole/recordings
-    entrypoint: ["/bin/sh", "-c", "\
-      export POSTGRES_PASSWORD=$(cat /run/secrets/db_password); \
-      exec /opt/guacamole/bin/start.sh "]
-    secrets:
-      - db_user
-      - db_password
     networks:
       - caddy
-
-secrets:
-  db_user:
-    file: ./secrets/db_user
-  db_password:
-    file: ./secrets/db_password
 
 networks:
   caddy:
