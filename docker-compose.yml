@@ -1,6 +1,7 @@
 services:
   guacd:
     image: guacamole/guacd:${GUAC_VERSION}
+    platform: linux/amd64
     container_name: guacd
     restart: unless-stopped
     networks:
@@ -24,6 +25,7 @@ services:
 
   guacamole:
     image: guacamole/guacamole:${GUAC_VERSION}
+    platform: linux/amd64
     container_name: guacamole
     depends_on: [guacd, postgres]
     restart: unless-stopped

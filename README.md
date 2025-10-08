@@ -20,6 +20,8 @@ Go to the repo folder, e.g. `cd ~/containers/guac` and create a local .env file 
 cp $PWD/.env.template $PWD/.env
 ```
 
+Edit: `nano $PWD/.env`
+
 ## Create secrets
 
 Go to the repo folder, e.g. `cd ~/containers/guac` and create the secrets
