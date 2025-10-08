@@ -1,0 +1,8 @@
+.env
+secrets/
+db/
+backups/
+config/secret*
+recordings/
+*.tar.gz
+*.sql
