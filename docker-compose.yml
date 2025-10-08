@@ -32,6 +32,8 @@ services:
       POSTGRESQL_DATABASE: ${POSTGRES_DB}
       POSTGRESQL_USERNAME: ${POSTGRES_USER}
       POSTGRESQL_PASSWORD: ${POSTGRES_PASSWORD}
+      GUACD_HOSTNAME: guacd
+      GUACD_PORT: 4822
     volumes:
       - ${CONFIG_DIR}:/etc/guacamole
       - ${RECORDINGS_DIR}:/var/lib/guacamole/recordings

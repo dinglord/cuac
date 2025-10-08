@@ -9,7 +9,7 @@ Assumption is that Caddy is already running in Docker, and that it is connected 
 Go to the repo folder, e.g. `cd ~/containers/guac` and create directories:
 
 ```sh
-mkdir -p $PWD/{recordings,db,backups,secrets}
+mkdir -p $PWD/{recordings,db,backups}
 ```
 
 ## Create a local .env
@@ -66,6 +66,17 @@ sudo docker run --platform=linux/amd64 --rm guacamole/guacamole:1.6.0 \
   /opt/guacamole/bin/initdb.sh --postgresql \
 | sudo docker exec -i guac-postgres psql -U "$DB_USER" -d "$DB_NAME"
 ```
+
+if you need to remove: sudo docker compose rm -f guacamole
+
+check sudo docker compose logs -f guacamole
+
+Defaults:
+
+Username: guacadmin
+Password: guacadmin
+
+Once you log in, immediately change the password, because this account has full admin rights. I clone it, change username and password, login and then delete guacadmin.
 
 ## Backup script (reads passwords from secrets)
 
