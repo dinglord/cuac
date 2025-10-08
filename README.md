@@ -115,3 +115,11 @@ Run it like this (provide the correct backup name):
 ```sh
 $PWD/scripts/restore_guac.sh ~/guac/backups/guac_2025-10-08_031500.tar.gz
 ```
+
+## Security summary
+
+- .env, secrets/, db/, backups/, recordings/ are ignored by git.
+- All credentials come from untracked files.
+- Caddy provides TLS; no ports exposed to the host.
+- Database is isolated inside Docker’s private network.
+- If you add SSH keys inside Guacamole, remember they are stored reversibly in the DB — keep DB access restricted.
