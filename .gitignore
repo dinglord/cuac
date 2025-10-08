@@ -6,3 +6,4 @@ config/secret*
 recordings/
 *.tar.gz
 *.sql
+.DS_Store
