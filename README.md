@@ -43,16 +43,16 @@ docker exec caddy caddy reload --config /etc/caddy/Caddyfile
 
 ## Initialize + start
 
+Go to the repo folder, e.g. `cd ~/containers/guac`
 
 ```sh
-cd ~/guac
 docker compose up -d
 
 # One-time schema init:
 docker exec guacamole /opt/guacamole/bin/initdb.sh --postgres \
   | docker exec -i guac-postgres psql \
-      -U "$(cat secrets/db_user)" \
-      -d "$(grep POSTGRES_DB .env | cut -d= -f2)"
+      -U "$(cat $PWD/secrets/db_user)" \
+      -d "$(grep POSTGRES_DB $PWD/.env | cut -d= -f2)"
 ```
 
 ## Backup script (reads passwords from secrets)
